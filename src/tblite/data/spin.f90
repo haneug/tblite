@@ -24,8 +24,7 @@ module tblite_data_spin
    implicit none
    private
 
-   public :: get_spin_constant
-
+   public :: get_spin_constant, read_spin_constants
 
    !> Get spin constant for species
    interface get_spin_constant
@@ -164,6 +163,18 @@ elemental function get_spin_constant_number(jang, iang, number) result(wll)
    end if
 
 end function get_spin_constant_number
+
+!> Read spin constants from external file
+subroutine read_spin_constants(filename)
+
+   !> Name of the inputfile
+   integer, intent(in) :: jang, iang
+
+   !> Read from spin_param.txt and modify spin_constants accordingly 
+
+end subroutine read_spin_constants
+
+
 
 
 end module tblite_data_spin

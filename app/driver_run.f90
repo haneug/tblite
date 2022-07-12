@@ -178,6 +178,9 @@ subroutine run_main(config, error)
          type(spin_polarization), allocatable :: spin
          real(wp), allocatable :: wll(:, :, :)
          allocate(spin)
+         if (config%spin_polarized_input) then
+            read_spin_constants(config%sp_input)
+         end if
          call get_spin_constants(wll, mol, calc%bas)
          call new_spin_polarization(spin, mol, wll, calc%bas%nsh_id)
          call move_alloc(spin, cont)

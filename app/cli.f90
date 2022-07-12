@@ -76,6 +76,10 @@ module tblite_cli
       real(wp), allocatable :: efield(:)
       !> Spin polarization
       logical :: spin_polarized = .false.
+      !> External spin polarization parameters
+      logical :: spin_polarized_input = .false.
+      !> File for external spin polarization parameters
+      character(len=:), allocatable :: sp_input
       !> Algorithm for electronic solver
       integer :: solver = lapack_algorithm%gvd
    end type run_config
@@ -279,6 +283,22 @@ subroutine get_run_arguments(config, list, start, error)
 
       case("--spin-polarized")
          config%spin_polarized = .true.
+
+      case("--spexternal")
+         config%spin_polarized = .true.
+         config%spin_polarized_input = .true.
+         config%sp_input = "spin_param.txt"
+         iarg = iarg + 1
+         call list%get(iarg, arg)
+         if (allocated(arg)) then
+            if (arg(1:1) == "-") then
+               iarg = iarg - 1
+               cycle
+            end if
+            call move_alloc(arg, config%sp_input)
+          end if
+        end select
+      end do
 
       case("--method")
          if (allocated(config%param)) then
