@@ -296,9 +296,7 @@ subroutine get_run_arguments(config, list, start, error)
                cycle
             end if
             call move_alloc(arg, config%sp_input)
-          end if
-        end select
-      end do
+         end if
 
       case("--method")
          if (allocated(config%param)) then

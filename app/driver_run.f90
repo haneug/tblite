@@ -25,7 +25,7 @@ module tblite_driver_run
    use tblite_basis_type, only : basis_type
    use tblite_container, only : container_type
    use tblite_context, only : context_type, context_terminal, escape
-   use tblite_data_spin, only : get_spin_constant
+   use tblite_data_spin, only : get_spin_constant, read_spin_constants
    use tblite_external_field, only : electric_field
    use tblite_lapack_solver, only : lapack_solver
    use tblite_output_ascii
@@ -179,7 +179,7 @@ subroutine run_main(config, error)
          real(wp), allocatable :: wll(:, :, :)
          allocate(spin)
          if (config%spin_polarized_input) then
-            read_spin_constants(config%sp_input)
+            call read_spin_constants(config%sp_input)
          end if
          call get_spin_constants(wll, mol, calc%bas)
          call new_spin_polarization(spin, mol, wll, calc%bas%nsh_id)

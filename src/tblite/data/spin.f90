@@ -35,7 +35,7 @@ module tblite_data_spin
    integer, parameter :: lidx(0:2, 0:2) = reshape(& ! ss sp sd  sp pp pd  sd pd dd
       & [1, 2, 4,  2, 3, 5,  4, 5, 6], shape(lidx))
 
-   real(wp), parameter :: spin_constants(6, 86) = reshape([&  ! ss, sp, pp, sd, pd, dd
+   real(wp) :: spin_constants(6, 86) = reshape([&  ! ss, sp, pp, sd, pd, dd
       -0.1242700_wp, 0.0000000_wp, 0.0000000_wp, 0.0000000_wp, 0.0000000_wp, 0.0000000_wp, &
       -0.0865325_wp, 0.0000000_wp, 0.0000000_wp, 0.0000000_wp, 0.0000000_wp, 0.0000000_wp, &
       -0.0267250_wp, 0.0000000_wp, 0.0000000_wp, 0.0000000_wp, 0.0000000_wp, 0.0000000_wp, &
@@ -168,7 +168,18 @@ end function get_spin_constant_number
 subroutine read_spin_constants(filename)
 
    !> Name of the inputfile
-   integer, intent(in) :: jang, iang
+   character(len=*),intent(in) :: filename
+   integer :: input 
+   integer :: i
+
+   open(newunit=input, file=filename, status='old')
+   do i=1,86
+     read(input, *) spin_constants(1,i), spin_constants(2,i), spin_constants(3,i), spin_constants(4,i), & 
+        & spin_constants(5,i), spin_constants(6,i)
+   end do
+    
+
+   close(input)
 
    !> Read from spin_param.txt and modify spin_constants accordingly 
 

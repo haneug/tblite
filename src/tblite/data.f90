@@ -25,8 +25,8 @@ module tblite_data
    use tblite_data_atomicrad, only : get_atomic_rad
    use tblite_data_covrad, only : get_covalent_rad
    use tblite_data_paulingen, only : get_pauling_en
-   use tblite_data_spin, only : get_spin_constant
+   use tblite_data_spin, only : get_spin_constant, read_spin_constants
    implicit none
 
-   public :: get_atomic_rad, get_covalent_rad, get_pauling_en, get_spin_constant
+   public :: get_atomic_rad, get_covalent_rad, get_pauling_en, get_spin_constant, read_spin_constants
 end module tblite_data
