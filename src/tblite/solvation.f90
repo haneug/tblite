@@ -55,11 +55,11 @@ subroutine new_solvation(solv, mol, input, error, method)
    !> Method for parameter selection
    character(len=:), intent(in), optional :: method
 
-   if (not present(method)) then
+   if (.not. present(method)) then
       method = "gfn2"
    end if
 
-   
+
    if (allocated(input%alpb)) then
       !> Get parameters for alpb/gbsa -> descreening, scale, offset
       call get_alpb_param(input%alpb, method)
